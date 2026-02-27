@@ -35,17 +35,15 @@ Need support beyond the scope of this README? Have any questions? Feel free to j
 # Initial Setup (Source code)
 
 1. Install [node.js LTS](https://nodejs.org/en/).
-2. Acquire *weather.com* and *mapbox.com* API keys. These are required for weather data and radar frames respectively.
-(Please note that you will have to install the Mapbox API key in two places.)
-3. Go to `/webroot/js` and open `config.js`.
-4. Line 1 is where your *weather.com*  API key goes. Replace `"YOUR_API_KEY"` with your *weather.com* API key.
-5. Line 2 is where your *mapbox.com*  API key goes. Replace `"YOUR_API_KEY"` with your *mapbox.com* API key.
-6. Save your changes to `config.js` and close out of it.
-7. Now, open `radar.js` in the same folder.
-8. Line 8, or wherever *mapboxgl.accessToken* is located, is the second place your *mapbox.com*  API key goes. Replace `"map_key"` with your *mapbox.com* API key.
-9. Save your changes to `radar.js` and close out of it.
-10. In terminal / command prompt within the webroot directory, run `npm install --production`. This will install all dependencies required to run.
-11. In terminal / command prompt within the webroot directory, run `npm start`. This will start a local web server, which is required to run the sim.
+2. Acquire *weather.com*, *mapbox.com*, *developer.tomtom*, and *HERE.com* . API keys. These are required for weather data, radar frames, and traffic, respectively.
+3. Go to `/main/configs` and open `yourConfig.json`.
+4. Line 4 is where your *weather.com*  API key goes. Replace `"YOUR_API_KEY"` with your *weather.com* API key.
+5. Line 5 is where your *mapbox.com*  API key goes. Replace `"YOUR_API_KEY"` with your *mapbox.com* API key.
+6. Line 6 is where your *mapbox.com*  API key goes. Replace `"YOUR_API_KEY"` with your *developer.tomtom.com* API key. (optional, only if you want traffic report)
+7. Line 7 is where your *mapbox.com*  API key goes. Replace `"YOUR_API_KEY"` with your *HERE.com* API key. (optional, only if you want traffic flow)
+8. Save your changes to `yourConfig.json` and close it.
+9. In terminal / command prompt within the main directory, run `npm install --production`. This will install all dependencies required to run.
+10. In terminal / command prompt within the main directory, run `npm start`. This will start a local web server, which is required to run the sim.
 
 ------------
 
