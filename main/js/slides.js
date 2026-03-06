@@ -1119,22 +1119,26 @@ var slidePrograms = {
       $('.titletext').text("Traffic Flow")
       $('.headertext').text(weatherData.trafficFlow.locationName)
       var divs = [".one", ".two", ".three"]
+	  var bump = round*3
       var blockColors = {"GREEN":"#59cb61", "YELLOW":"#dfcd26", "RED":"#bf2026"}
+	  var pages = Math.ceil(weatherData.trafficFlow.routes.length/3)
       if (weatherData.trafficFlow.noReport == false && weatherData.trafficFlow.routes.length > 0) {
         fadeSlideIn($(".traffic-flow"), 500)
-        audioPlayer.playTrafficFlow()
+		if (round == 0) {
+			audioPlayer.playTrafficFlow()
+		}
         $(".traffic-flow .panel.one .fullgroup").fadeOut(0)
         $(".traffic-flow .panel.two .fullgroup").fadeOut(0)
         $(".traffic-flow .panel.three .fullgroup").fadeOut(0)
         for (var i = 0; i < 3; i++) {
-          if (weatherData.trafficFlow.routes[i]) {
+          if (weatherData.trafficFlow.routes[i+bump]) {
             $(".traffic-flow .panel" + divs[i] + " .fullgroup").fadeIn(0)
-            $(".traffic-flow .panel" + divs[i] + " .description").text(weatherData.trafficFlow.routes[i].from + " to " + weatherData.trafficFlow.routes[i].to)
-            $(".traffic-flow .panel" + divs[i] + " .trafficflow").text(weatherData.trafficFlow.routes[i].speed)
-            $(".traffic-flow .panel" + divs[i] + " .triptime").text(weatherData.trafficFlow.routes[i].travelTime)
-            $(".traffic-flow .panel" + divs[i] + " .trafficflowcover").css({"background-color":blockColors[weatherData.trafficFlow.routes[i].color]})
-            $(".traffic-flow .panel" + divs[i] + " .routeicon").css({"background-image": "url(" + weatherData.trafficFlow.routes[i].routeIcon + ")", "background-repeat":"no-repeat", "background-size":"100%"})
-            if (weatherData.trafficFlow.routes[i].speed != "CLEAR") {
+            $(".traffic-flow .panel" + divs[i] + " .description").text(weatherData.trafficFlow.routes[i+bump].from + " to " + weatherData.trafficFlow.routes[i+bump].to)
+            $(".traffic-flow .panel" + divs[i] + " .trafficflow").text(weatherData.trafficFlow.routes[i+bump].speed)
+            $(".traffic-flow .panel" + divs[i] + " .triptime").text(weatherData.trafficFlow.routes[i]+bump.travelTime)
+            $(".traffic-flow .panel" + divs[i] + " .trafficflowcover").css({"background-color":blockColors[weatherData.trafficFlow.routes[i+bump].color]})
+            $(".traffic-flow .panel" + divs[i] + " .routeicon").css({"background-image": "url(" + weatherData.trafficFlow.routes[i+bump].routeIcon + ")", "background-repeat":"no-repeat", "background-size":"100%"})
+            if (weatherData.trafficFlow.routes[i+bump].speed != "CLEAR") {
               $(".traffic-flow .panel" + divs[i] + " .mingroup").fadeIn(0)
               $(".traffic-flow .panel" + divs[i] + " .trafficflow").css({"padding-top":"0px","font-size":"92px"})
             } else {
@@ -1145,7 +1149,15 @@ var slidePrograms = {
         }
 
         setTimeout(() => {
-          fadeSlideOut($(".traffic-flow"), 500, true)
+          if (round < (pages-1)) {
+            fadeSlideOut($(".traffic-flow"), 250, false)
+            setTimeout(() => {
+              round++
+              currentProgram()
+            }, 250);
+          } else {
+            fadeSlideOut($(".traffic-flow"), 500, true)
+          }
         }, slideLength);
       } else {
         fadeSlideOut($(".traffic-flow"), 0, true, 0)
