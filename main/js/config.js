@@ -62,6 +62,7 @@ var systemSettings = {
     }
   },
   dataMaps: {
+    auto:true,
     leftPos: "",
     topPos: "",
     zoom: 3.3
