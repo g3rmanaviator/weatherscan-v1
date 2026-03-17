@@ -187,7 +187,9 @@ function locationJS() {
                 systemSettings.mainCity.lat = data.location.latitude[0];
                 systemSettings.mainCity.lon = data.location.longitude[0];
                 systemSettings.mainCity.obsIcaoCode = data.location.icaoCode[0];
+                if (systemSettings.dataMaps.auto) {
                 centerDataMaps(data.location.adminDistrictCode[0]);
+                }
                 systemSettings.mainCity.radar.lat = data.location.latitude[0];
                 systemSettings.mainCity.radar.lon = data.location.longitude[0];
                 if (systemSettings.mainCity.radar.auto) {
@@ -267,7 +269,9 @@ function locationJS() {
                 systemSettings.mainCity.almanacLocationName = data.city;
                 systemSettings.mainCity.lat = data.lat;
                 systemSettings.mainCity.lon = data.lon;
+                if (systemSettings.dataMaps.auto) {
                 centerDataMaps(data.region);
+                }
                 systemSettings.mainCity.radar.lat = data.lat;
                 systemSettings.mainCity.radar.lon = data.lon;
                 if (systemSettings.mainCity.radar.auto) {
@@ -464,49 +468,50 @@ function locationJS() {
 
     //data maps will be done later so them georgians can enjoy a localized temp unavailable map
     function centerDataMaps(region) {
-        console.log(region)
-        switch (String(region)) {
-            case "ME" || "VT" || "NH" || "MA" || "CT" || "RI" || "NY" || "NJ" || "PA" || "DE" || "MD" || "WV" || "OH" || "IN" || "MI" || "WI" || "MN" || "IA" || "IL":
-                systemSettings.dataMaps.topPos = 78
-                systemSettings.dataMaps.leftPos = -30
-                systemSettings.dataMaps.zoom = 3.3
-                break;
-            case "NC" || "VA" || "MO" || "KY" || "TN":
-                systemSettings.dataMaps.leftPos = -35.8;
-                systemSettings.dataMaps.topPos = 33.3;
-                systemSettings.dataMaps.zoom = 4;
-                break;
-            case "GA" || "FL" || "SC" || "AR" || "LA" || "MS" || "AL":
-                systemSettings.dataMaps.leftPos = -35.8;
-                systemSettings.dataMaps.topPos = 33.3;
-                systemSettings.dataMaps.zoom = 4;
-                break;
-            case "WA" || "ID" || "MT" || "ND" || "SD" || "WY" || "OR":
-                systemSettings.dataMaps.leftPos = 41;
-                systemSettings.dataMaps.topPos = 107;
-                systemSettings.dataMaps.zoom = 4;
-                break;
-            case "CA" || "NV" || "UT" || "CO" || "NE" || "KS":
-                systemSettings.dataMaps.leftPos = 34;
-                systemSettings.dataMaps.topPos = 67;
-                systemSettings.dataMaps.zoom = 3.7;
-                break;
-            case "TX" || "OK":
-                systemSettings.dataMaps.leftPos = 6;
-                systemSettings.dataMaps.topPos = 26;
-                systemSettings.dataMaps.zoom = 3.7;
-                break;
-            case "AZ" || "NM":
-                systemSettings.dataMaps.leftPos = 44;
-                systemSettings.dataMaps.topPos = 53;
-                systemSettings.dataMaps.zoom = 4.5;
-                break;
-            default:
-                systemSettings.dataMaps.leftPos = 0;
-                systemSettings.dataMaps.topPos = 18;
-                systemSettings.dataMaps.zoom = 1.25;
-        }
+    console.log(region)
+    var state = region
+    switch (true) {
+        case state == "ME" || state == "VT" || state == "NH" || state == "MA" || state == "CT" || state == "RI" || state == "NY" || state == "NJ" || state == "PA" || state == "DE" || state == "MD" || state == "WV" || state == "OH" || state == "IN" || state == "MI" || state == "WI" || state == "MN" || state == "IA" || state == "IL":
+            systemSettings.dataMaps.topPos = 78
+            systemSettings.dataMaps.leftPos = -30
+            systemSettings.dataMaps.zoom = 3.3
+            break;
+        case state == "NC" || state == "VA" || state == "MO" || state == "KY" || state == "TN":
+            systemSettings.dataMaps.leftPos = -35.8;
+            systemSettings.dataMaps.topPos = 33.3;
+            systemSettings.dataMaps.zoom = 4;
+            break;
+        case state == "GA" || state == "FL" || state == "SC" || state == "AR" || state == "LA" || state == "MS" || state == "AL":
+            systemSettings.dataMaps.leftPos = -35.8;
+            systemSettings.dataMaps.topPos = 33.3;
+            systemSettings.dataMaps.zoom = 4;
+            break;
+        case state == "WA" || state == "ID" || state == "MT" || state == "ND" || state == "SD" || state == "WY" || state == "OR":
+            systemSettings.dataMaps.leftPos = 41;
+            systemSettings.dataMaps.topPos = 107;
+            systemSettings.dataMaps.zoom = 4;
+            break;
+        case state == "CA" || state == "NV" || state == "UT" || state == "CO" || state == "NE" || state == "KS":
+            systemSettings.dataMaps.leftPos = 34;
+            systemSettings.dataMaps.topPos = 67;
+            systemSettings.dataMaps.zoom = 3.7;
+            break;
+        case state == "TX" || state == "OK":
+            systemSettings.dataMaps.leftPos = 6;
+            systemSettings.dataMaps.topPos = 26;
+            systemSettings.dataMaps.zoom = 3.7;
+            break;
+        case state == "AZ" || state == "NM":
+            systemSettings.dataMaps.leftPos = 44;
+            systemSettings.dataMaps.topPos = 53;
+            systemSettings.dataMaps.zoom = 4.5;
+            break;
+        default:
+            systemSettings.dataMaps.leftPos = 0;
+            systemSettings.dataMaps.topPos = 18;
+            systemSettings.dataMaps.zoom = 1.25;
     }
+}
 
     function distanceByDegrees(c1, c2) {
         var lat1 = parseFloat(c1.lat), lon1 = parseFloat(c1.lon),
